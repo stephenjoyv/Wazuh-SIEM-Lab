@@ -1,0 +1,18 @@
+"echo 'ossec: Syscheck - File '\''/opt/sensitive/secret.txt'\'' added' | /var/ossec/bin/wazuh-logtest"
+Starting wazuh-logtest v4.14.7
+Type one log per line
+
+**Phase 1: Completed pre-decoding.
+        full event: 'ossec: Syscheck - File '/opt/sensitive/secret.txt' added'
+
+**Phase 2: Completed decoding.
+        name: 'ossec'
+
+**Phase 3: Completed filtering (rules).
+        id: '100004'
+        level: '12'
+        description: 'Wazuh Detect: file changed, added or deleted in protected directory '
+        groups: '['local', 'syscheck']'
+        firedtimes: '1'
+        mail: 'True'
+**Alert to be generated

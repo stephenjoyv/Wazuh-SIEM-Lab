@@ -1,0 +1,33 @@
+
+<group name="local,syslog,sshd,">
+    <rule id="100002" level="11" frequency="8" timeframe="15" ignore="60">
+    <if_matched_sid>5760</if_matched_sid>
+    <same_source_ip />
+    <description>Wazuh Detect: Detected 8 or more failed SSH login attempts from the same IP within 15 seconds.</description>
+    <mitre>
+      <id>T1110.001</id>
+    </mitre>
+  </rule>
+    <!-- успешный вход сразу после всплеска неудач с того же IP -->
+  <rule id="100003" level="13" timeframe="120">
+    <if_sid>5715</if_sid>
+    <if_matched_sid>100002</if_matched_sid>
+    <same_source_ip />
+    <description>Wazuh Detect: successful SSH login from an IP that just brute-forced (possible compromise).</description>
+    <mitre>
+      <id>T1110.001</id>
+      <id>T1078</id>
+    </mitre>
+  </rule>
+
+</group>
+<group name="local,syscheck,">
+  <rule id="100004" level="12">
+    <if_sid>550,553,554</if_sid>
+    <field name="file">^/opt/sensitive/</field>
+    <mitre>
+      <id>T1565.001</id>
+    </mitre>
+    <description>Wazuh Detect: file changed, added or deleted in protected directory $(file)</description>
+  </rule>
+</group>
